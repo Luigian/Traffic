@@ -19,6 +19,23 @@ def main():
     if len(sys.argv) not in [2, 3]:
         sys.exit("Usage: python traffic.py data_directory [model.h5]")
 
+    images = []
+    labels = []
+    
+    data_dir = 'gtsrb-small'
+    for dirname in os.listdir(data_dir):
+        for filename in os.listdir(os.path.join(data_dir, dirname)):
+            img = cv2.imread(os.path.join(data_dir, dirname, filename))
+            img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
+            images.append(img)
+            labels.append(int(dirname))
+    
+    print(np.array(images).shape)
+    print(labels)
+    print(np.array(labels).shape)
+
+    sys.exit()
+
     # Get image arrays and labels for all image files
     images, labels = load_data(sys.argv[1])
 
