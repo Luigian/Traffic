@@ -9,9 +9,8 @@ from sklearn.model_selection import train_test_split
 EPOCHS = 10
 IMG_WIDTH = 30
 IMG_HEIGHT = 30
-NUM_CATEGORIES = 43
+NUM_CATEGORIES = len(os.listdir(sys.argv[1]))
 TEST_SIZE = 0.4
-
 
 def main():
 
@@ -33,6 +32,7 @@ def main():
 
     # Get a compiled neural network
     model = get_model()
+    print(model.summary())
 
     # Fit model on training data
     model.fit(x_train, y_train, epochs=EPOCHS)
@@ -81,8 +81,11 @@ def get_model():
     The output layer should have `NUM_CATEGORIES` units, one for each category.
     """
     model = tf.keras.models.Sequential([
-        tf.keras.layers.Conv2D(32, (3, 3), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)),
-        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+        tf.keras.layers.Conv2D(32, 5, activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)),
+        tf.keras.layers.Conv2D(32, 5, activation="relu"),
+        tf.keras.layers.Conv2D(32, 5, activation="relu"),
+        # tf.keras.layers.Conv2D(32, 3, activation="relu"),
+        tf.keras.layers.MaxPooling2D(3),
         tf.keras.layers.Flatten(),
         tf.keras.layers.Dense(128, activation="relu"),
         tf.keras.layers.Dropout(0.5),
