@@ -4,29 +4,29 @@
 
 <img src="resources/images/traffic_output.png" width="1000">
 
-Question Answering (QA) is a field within natural language processing focused on designing systems that can answer questions. 
+As research continues in the development of self-driving cars, one of the key challenges is computer vision, allowing these cars to develop an understanding of their environment from digital images. In particular, this involves the ability to recognize and distinguish road signs – stop signs, speed limit signs, yield signs, and more.
 
-This is a question answering system based on **inverse document frequency** that will perform two tasks: document retrieval and passage retrieval.
+In this project, I used TensorFlow to build a neural network to classify road signs based on an image of those signs. To do so, I needed a labeled dataset: a collection of images that have already been categorized by the road sign represented in them.
 
-First, the system will have access to a corpus of text documents. When presented with a query (a question in English asked by the user), document retrieval will first identify which document(s) are most relevant to the query. To find the most relevant documents, we’ll use tf-idf to rank documents based both on term frequency for words in the query as well as inverse document frequency for words in the query. 
-
-Then, once the top documents are found, passage retrieval will subdivide the top document(s) into passages (in this case, sentences) and score them using a combination of inverse document frequency and a query term density measure, so that the most relevant passage to the question can be determined.
+Several such data sets exist, but for this project, I used the German Traffic Sign Recognition Benchmark (GTSRB) dataset, which contains thousands of images of 43 different kinds of road signs.
 
 ## Implementation
 
-Inside the `corpus` directory, each document is a text file containing the contents of a Wikipedia page. The AI can find sentences from these files that are relevant to a user’s query. You are welcome and encouraged to add, remove, or modify files in the corpus if you’d like to experiment with answering queries based on a different corpus of documents. Just be sure each file in the corpus is a text file ending in .txt.
+The `gtsrb` directory contains 43 subdirectories numbered `0` through `42`. Each numbered subdirectory represents a different category (a different type of road sign). Within each traffic sign’s directory is a collection of images of that type of traffic sign.
 
-At `questions.py`, in the main function, we first load the files from the corpus directory into memory (via the `load_files` function). Each of the files is then tokenized (via `tokenize`) into a list of words, which then allows us to compute inverse document frequency values for each of the words (via `compute_idfs`). The user is then prompted to enter a query. The `top_files` function identifies the files that are the best match for the query. From those files, sentences are extracted, and the `top_sentences` function identifies the sentences that are the best match for the query.
-
-The global variable `FILE_MATCHES` specifies how many files should be matched for any given query. The global variable `SENTENCES_MATCHES` specifies how many sentences within those files should be matched for any given query. By default, each of these values is 1. The AI will find the top sentence from the top matching document as the answer to the question. 
+In `traffic.py` the `main` function accept as command-line arguments a directory containing the data and (optionally) a filename to which to save the trained model. The data and corresponding labels are then loaded from the data directory (via the `load_data` function) and split into training and testing sets. After that, the `get_model` function is called to obtain a compiled neural network that is then fitted on the training data. The model is then evaluated on the testing data. Finally, if a model filename was provided, the trained model is saved to disk.
 
 ### Loading the data
 
-* The `load_files` function accepts the name of a directory and return a dictionary mapping the filename of each .txt file inside that directory to the file’s contents as a string.
+* The `load_data` function accepts as an argument `data_dir`, representing the path to a directory where the data is stored, and return image arrays and labels for each image in the data set.
+
+* We may assume that `data_dir` will contain one directory named after each category, numbered `0` through `NUM_CATEGORIES` - 1. Inside each category directory will be some number of image files.
+
+* The OpenCV-Python module (`cv2`) is used to read each image as a `numpy.ndarray` (a numpy multidimensional array). To pass these images into a neural network, the images need to be the same size, so each image is being resized to have width `IMG_WIDTH` and height `IMG_HEIGHT`.
+
+* The function return a tuple `(images, labels)`. `images` is a list of all of the images in the data set, where each image is represented as a `numpy.ndarray` of the appropriate size. `labels` is a list of integers, representing the category number for each of the corresponding images in the `images` list.
 
 * On macOS, the `/` character is used to separate path components, while the `\` character is used on Windows. By using `os.path.join`, this function is platform-independent, it works regardless of operating system.
-
-* In the returned dictionary, there's one key named for each .txt file in the directory. The value associated with that key is a string (the result of reading the corresponding file).
 
 ### Extracting the words
 
