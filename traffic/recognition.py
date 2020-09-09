@@ -9,7 +9,7 @@ IMG_HEIGHT = 30
 
 # Check command-line arguments
 if len(sys.argv) != 3:
-    sys.exit("Usage: python recognition.py test_directory model")
+    sys.exit("Usage: python recognition.py recognize_directory model")
 
 recognize_directory = sys.argv[1]
 model = tf.keras.models.load_model(sys.argv[2])
