@@ -11,12 +11,12 @@ IMG_HEIGHT = 30
 if len(sys.argv) != 3:
     sys.exit("Usage: python recognition.py test_directory model")
 
-test_directory = sys.argv[1]
+recognize_directory = sys.argv[1]
 model = tf.keras.models.load_model(sys.argv[2])
 
 # Recognition of multiple images
-for infile in os.listdir(test_directory):
-    img = cv2.imread(os.path.join(test_directory, infile))
+for infile in os.listdir(recognize_directory):
+    img = cv2.imread(os.path.join(recognize_directory, infile))
     img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
     data = np.asarray(img)
     data = data / 255.0
