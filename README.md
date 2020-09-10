@@ -46,6 +46,7 @@ In `traffic.py` the `main` function accept as command-line arguments a directory
   - dropout
 
 ### What did I try? What worked well? What didn’t work well? What did I notice?
+### What did I try, what worked well, what didn’t work well and what did I notice?
 
 **Convolutional and pooling layers**
 
