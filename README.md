@@ -32,9 +32,9 @@ In `traffic.py` the `main` function accept as command-line arguments a directory
 
 * The `get_model` function return a compiled neural network model.
 
-* We may assume that the input to the neural network will be of the shape (IMG_WIDTH, IMG_HEIGHT, 3) (that is, an array representing an image of width IMG_WIDTH, height IMG_HEIGHT, and 3 values for each pixel for red, green, and blue).
+* We may assume that the input to the neural network will be of the shape `(IMG_WIDTH, IMG_HEIGHT, 3)` (that is, an array representing an image of width `IMG_WIDTH`, height `IMG_HEIGHT`, and `3` values for each pixel for red, green, and blue).
 
-* The output layer of the neural network have NUM_CATEGORIES units, one for each of the traffic sign categories.
+* The output layer of the neural network have `NUM_CATEGORIES` units, one for each of the traffic sign categories.
 
 * The number of layers and the types of layers included in between are the result of experimenting with:
   - different numbers of convolutional and pooling layers
@@ -43,35 +43,23 @@ In `traffic.py` the `main` function accept as command-line arguments a directory
   - different numbers and sizes of hidden layers
   - dropout
 
-What did you try? What worked well? What didn’t work well? What did you notice?
+### What did I try? What worked well? What didn’t work well? What did I notice?
 
-### Calculating the inverse document frecuencies
+**Convolutional and pooling layers**
 
-* The `compute_idfs` function accepts a dictionary of documents (a dictionary mapping names of documents to a list of words in that document) and return a new dictionary mapping words to their IDF (inverse document frequency) values. 
+Multiple convolutional layers were able to get better results than a single convolutional layer. Also consecutives convolutional layers (Conv-Conv-Pool) were more effective than alterning with pooling layers (Conv-Pool-Conv).
 
-* The inverse document frequency of a word is defined by taking the natural logarithm of the number of documents divided by the number of documents in which the word appears.
+My explanation to this is that as convolutional layers turned to crop the images, this actually worked pretty well for this image based dataset where the most relevant information for differentiation is at the center of the traffic signs, and not necessarily in the shape of the sign or at the messy background. So, going and cropping in total 6 pixels on each side by using three consecutive 5x5-kernel-convolution layers results in kicking out a 40% of not very relevant pixel information.
 
-* The returned dictionary maps every word that appears in at least one of the documents to its inverse document frequency value.
+I tried using 8 and 16 as the number of feature maps generated in each convolution, but 32 was consistently better.
 
-### Finding the top file matches
+After this, only one 3x3-pooling layer was good enough to reduce the 32 feature maps to an optimal not-so-big-not-so-small size of 6x6, before flattening and passing them as inputs for the neural network. 
 
-* The `top_files` function accepts a query (a set of words), `files` (a dictionary mapping names of files to a list of their words), and `idfs` (a dictionary mapping words to their IDF values), and return a list of the filenames of the `n` top files that match the query, ranked according to **tf-idf**.
+**Hidden layers**
 
-* The tf-idf for a term is computed by multiplying the number of times the term appears in the document (**term frecuency**) by the IDF value for that term.
+One single hidden layer containing a decent amount of units (120) worked far more better than multiple hidden layers (10) with significantly more units in the total (400).
 
-* Files are ranked according to the sum of tf-idf values for any word in the query that also appears in the file. Words in the query that do not appear in the file doesn't contribute to the file’s score.
-
-* The returned list of filenames is of length `n` and is ordered with the best match first.
-
-### Finding the top sentence matches
-
-* The `top_sentences` function accepts a query (a set of words), `sentences` (a dictionary mapping sentences to a list of their words), and `idfs` (a dictionary mapping words to their IDF values), and return a list of the `n` top sentences that match the query, ranked according to IDF.
-
-* Sentences are ranked according to **matching word measure**, which is the sum of IDF values for any word in the query that also appears in the sentence. Term frequency isn't taken into account here, only inverse document frequency.
-
-* If two sentences have the same value according to the matching word measure, then sentences with a higher **query term density** are preferred. Query term density is defined as the proportion of words in the sentence that are also words in the query. For example, if a sentence has 10 words, 3 of which are in the query, then the sentence’s query term density is 0.3.
-
-* The returned list of sentences is of length `n` and is ordered with the best match first.
+Dropout slightly reduced the accuracy of the minimizing loss function at training, but it is worthy for avoiding overfitting on the training samples.
 
 ## Resources
 * [Language - Lecture 6 - CS50's Introduction to Artificial Intelligence with Python 2020][cs50 lecture]
