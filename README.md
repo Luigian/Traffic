@@ -62,10 +62,9 @@ One single hidden layer containing a decent amount of units (120) worked far mor
 Dropout slightly reduced the accuracy of the minimizing loss function at training, but it is worthy for avoiding overfitting on the training samples.
 
 ## Resources
-* [Language - Lecture 6 - CS50's Introduction to Artificial Intelligence with Python 2020][cs50 lecture]
-* [How to Clean Text for Machine Learning with Python][clean text]
-* [Python | Nested Dictionary][nested dictionary]
-* [Breaking Ties: Second Sorting][second sorting]
+* [Neural Networks - Lecture 5 - CS50's Introduction to Artificial Intelligence with Python 2020][cs50 lecture]
+* [Tensorflow Keras overview][tf]
+* [OpenCV-Python documentation][opencv]
 
 ## Installation
 Inside of the `questions` directory:
@@ -82,9 +81,9 @@ Inside of the `questions` directory:
 
 A project from the course [CS50's Introduction to Artificial Intelligence with Python 2020][cs50 ai] from HarvardX.
 
-[cs50 lecture]: https://youtu.be/_hAVVULrZ0Q?t=4158
-[clean text]: https://machinelearningmastery.com/clean-text-machine-learning-python/
-[nested dictionary]: https://www.geeksforgeeks.org/python-nested-dictionary/
+[cs50 lecture]: https://youtu.be/mFZazxxCKbw?t=3181
+[tf]: https://www.tensorflow.org/guide/keras/sequential_model
+[opencv]: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_tutorials.html
 [second sorting]: https://runestone.academy/runestone/books/published/fopp/Sorting/SecondarySortOrder.html
 [linkedin]: https://www.linkedin.com/in/luis-sanchez-13bb3b189/
 [cs50 ai]: https://cs50.harvard.edu/ai/2020/
