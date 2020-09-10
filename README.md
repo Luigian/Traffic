@@ -6,9 +6,9 @@
 
 As research continues in the development of self-driving cars, one of the key challenges is computer vision, allowing these cars to develop an understanding of their environment from digital images. In particular, this involves the ability to recognize and distinguish road signs – stop signs, speed limit signs, yield signs, and more.
 
-In this project, I used TensorFlow to build a neural network to classify road signs based on an image of those signs. To do so, I needed a labeled dataset: a collection of images that have already been categorized by the road sign represented in them.
+This project uses TensorFlow to build a neural network to classify road signs based on an image of those signs. To do so, it needs a labeled dataset: a collection of images that have already been categorized by the road sign represented in them.
 
-Several such data sets exist, but for this project, I used the German Traffic Sign Recognition Benchmark (GTSRB) dataset, which contains thousands of images of 43 different kinds of road signs.
+Several such data sets exist, this project uses the German Traffic Sign Recognition Benchmark (GTSRB) data set, which contains thousands of images of 43 different kinds of road signs.
 
 <img src="resources/images/dataset.jpg" width="600">
 
@@ -16,7 +16,7 @@ Several such data sets exist, but for this project, I used the German Traffic Si
 
 The `gtsrb` directory contains 43 subdirectories numbered `0` through `42`. Each numbered subdirectory represents a different category (a different type of road sign). Within each traffic sign’s directory is a collection of images of that type of traffic sign.
 
-In `traffic.py` the `main` function accept as command-line arguments a directory containing the data and (optionally) a filename to which to save the trained model. The data and corresponding labels are then loaded from the data directory (via the `load_data` function) and split into training and testing sets. After that, the `get_model` function is called to obtain a compiled neural network that is then fitted on the training data. The model is then evaluated on the testing data. Finally, if a model filename was provided, the trained model is saved to disk.
+In `traffic.py` the `main` function accepts as command-line arguments a directory containing the data and (optionally) a filename to which to save the trained model. The data and corresponding labels are then loaded from the data directory (via the `load_data` function) and split into training and testing sets. After that, the `get_model` function is called to obtain a compiled neural network that is then fitted on the training data. The model is then evaluated on the testing data. Finally, if a model filename was provided, the trained model is saved to disk.
 
 ### Loading the data
 
@@ -45,8 +45,7 @@ In `traffic.py` the `main` function accept as command-line arguments a directory
   - different numbers and sizes of hidden layers
   - dropout
 
-### What did I try? What worked well? What didn’t work well? What did I notice?
-### What did I try, what worked well, what didn’t work well and what did I notice?
+### What did I try, what worked well, what didn’t work well, and what did I notice
 
 **Convolutional and pooling layers**
 
@@ -70,14 +69,24 @@ Dropout slightly reduced the accuracy of the minimizing loss function at trainin
 * [OpenCV-Python documentation][opencv]
 
 ## Installation
-Inside of the `questions` directory:
 
-* `pip3 install -r requirements.txt` | Install this project’s dependency: nltk for natural language processing.
+**Add the German Traffic Sign Recognition Benchmark (GTSRB) data set:**
+
+* Download the [data set], unzip it, and move the resulting `gtsrb` directory inside the `traffic` directory.
+
+**Install this project’s dependencies: opencv-python for image processing, scikit-learn for ML-related functions, and tensorflow for neural networks:**
+
+* Inside the `traffic` directory: `pip3 install -r requirements.txt`
 
 ## Usage
-Inside of the `questions` directory:
 
-* `python3 questions.py corpus` | Accepts the corpus of documents via a directory, and the query via user input.
+**To create, train, test and optionally save a model:** 
+
+* Inside of the `traffic` directory: `python traffic.py gtsrb [model.h5]`
+
+**To test a saved model on a selection of each of the 43 traffic signs:** 
+
+* Inside the `traffic/recognition_test` directory: `python recognition.py test ../model.h5`
 
 ## Credits
 [*Luis Sanchez*][linkedin] 2020.
@@ -87,7 +96,7 @@ A project from the course [CS50's Introduction to Artificial Intelligence with P
 [cs50 lecture]: https://youtu.be/mFZazxxCKbw?t=3181
 [tf]: https://www.tensorflow.org/guide/keras/sequential_model
 [opencv]: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_tutorials.html
-[second sorting]: https://runestone.academy/runestone/books/published/fopp/Sorting/SecondarySortOrder.html
+[data set]: https://drive.google.com/file/d/1bIiDs6DFGxI69lgX9cgu9ZBiP7SJEeio/view?usp=sharing
 [linkedin]: https://www.linkedin.com/in/luis-sanchez-13bb3b189/
 [cs50 ai]: https://cs50.harvard.edu/ai/2020/
 
