@@ -51,17 +51,17 @@ In `traffic.py` the `main` function accepts as command-line arguments a director
 
 Multiple convolutional layers were able to get better results than a single convolutional layer. Also, consecutive convolutional layers (conv-conv-pool) were more effective than alternating with pooling layers (conv-pool-conv).
 
-My explanation to this is that as convolutional layers turned to crop the images, this actually worked pretty well for this image based dataset where the most relevant information for differentiation is at the center of the traffic signs, and not necessarily in the shape of the sign or at the messy background. So, going and cropping in total 6 pixels on each side by using three consecutive 5x5-kernel-convolution layers results in kicking out a 40% of not very relevant pixel information.
+My explanation to this is that as convolutional layers turned to crop the images, this actually worked pretty well for this image based data set where the most relevant information for differentiation is at the center of the traffic signs, and not necessarily in the shape of the sign or at the messy background. So, going and cropping in total 6 pixels on each side by using three consecutive 5x5-kernel-convolution layers results in kicking out a 40% of not very relevant pixel information.
 
 I tried using 8 and 16 as the number of feature maps generated in each convolution, but 32 was consistently better.
 
-After this, only one 3x3-pooling layer was good enough to reduce the 32 feature maps to an optimal not-so-big-not-so-small size of 6x6, before flattening and passing them as inputs for the neural network. 
+After this, only one 3x3-pooling layer was good enough to reduce the 32 feature maps to an optimal not-to-big-not-to-small size of 6x6, before flattening and passing them as inputs for the neural network. 
 
 **Hidden layers**
 
 One single hidden layer containing a decent amount of units (120) worked far better than multiple hidden layers (10) with significantly more units in the total (400).
 
-Dropout slightly reduced the accuracy of the minimizing loss function at training, but it is worthy for avoiding overfitting on the training samples.
+Dropout slightly reduced the accuracy by incremented the loss at every training epoch, but it's worthy for avoiding overfitting on the training samples.
 
 ## Resources
 * [Neural Networks - Lecture 5 - CS50's Introduction to Artificial Intelligence with Python 2020][cs50 lecture]
