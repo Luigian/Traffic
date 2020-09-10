@@ -10,7 +10,7 @@ In this project, I used TensorFlow to build a neural network to classify road si
 
 Several such data sets exist, but for this project, I used the German Traffic Sign Recognition Benchmark (GTSRB) dataset, which contains thousands of images of 43 different kinds of road signs.
 
-<img src="resources/images/dataset.jpg" width="800">
+<img src="resources/images/dataset.jpg" width="600">
 
 ## Implementation
 
