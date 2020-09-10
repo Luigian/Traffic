@@ -76,7 +76,7 @@ Dropout slightly reduced the accuracy by incremented the loss at every training 
 
 **Install this project’s dependencies (opencv-python for image processing, scikit-learn for ML-related functions, and tensorflow for neural networks):**
 
-* Inside the `traffic` directory: `pip3 install -r requirements.txt`
+* Inside the `traffic` directory: `pip install -r requirements.txt`
 
 ## Usage
 
