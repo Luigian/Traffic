@@ -74,7 +74,7 @@ Dropout slightly reduced the accuracy of the minimizing loss function at trainin
 
 * Download the [data set], unzip it, and move the resulting `gtsrb` directory inside the `traffic` directory.
 
-**Install this project’s dependencies: opencv-python for image processing, scikit-learn for ML-related functions, and tensorflow for neural networks:**
+**Install this project’s dependencies (opencv-python for image processing, scikit-learn for ML-related functions, and tensorflow for neural networks):**
 
 * Inside the `traffic` directory: `pip3 install -r requirements.txt`
 
