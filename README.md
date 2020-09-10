@@ -8,7 +8,7 @@ As research continues in the development of self-driving cars, one of the key ch
 
 This project uses TensorFlow to build a neural network to classify road signs based on an image of those signs. To do so, it needs a labeled data set: a collection of images that have already been categorized by the road sign represented in them.
 
-Several such data sets exist, this project uses the German Traffic Sign Recognition Benchmark (GTSRB) data set, which contains thousands of images of 43 different kinds of road signs.
+Several such data sets exist, this project uses the [German Traffic Sign Recognition Benchmark] (GTSRB) data set, which contains thousands of images of 43 different kinds of road signs.
 
 <img src="resources/images/dataset.jpg" width="600">
 
@@ -93,6 +93,7 @@ Dropout slightly reduced the accuracy by incremented the loss at every training 
 
 A project from the course [CS50's Introduction to Artificial Intelligence with Python 2020][cs50 ai] from HarvardX.
 
+[German Traffic Sign Recognition Benchmark]: http://benchmark.ini.rub.de/?section=gtsrb&subsection=news
 [cs50 lecture]: https://youtu.be/mFZazxxCKbw?t=3181
 [tf]: https://www.tensorflow.org/guide/keras/sequential_model
 [opencv]: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_tutorials.html
