@@ -26,7 +26,7 @@ In `traffic.py` the `main` function accepts as command-line arguments a director
 
 * The OpenCV-Python module (`cv2`) is used to read each image as a `numpy.ndarray` (a numpy multidimensional array). To pass these images into a neural network, the images need to be the same size, so each image is being resized to have width `IMG_WIDTH` and height `IMG_HEIGHT`.
 
-* The function return a tuple `(images, labels)`. `images` is a list of all of the images in the data set, where each image is represented as a `numpy.ndarray` of the appropriate size. `labels` is a list of integers, representing the category number for each of the corresponding images in the `images` list.
+* The function return a tuple `(images, labels)`. `images` is a list of all the images in the data set, where each image is represented as a `numpy.ndarray` of the appropriate size. `labels` is a list of integers, representing the category number for each of the corresponding images in the `images` list.
 
 * On macOS, the `/` character is used to separate path components, while the `\` character is used on Windows. By using `os.path.join`, this function is platform-independent, it works regardless of operating system.
 
@@ -39,17 +39,17 @@ In `traffic.py` the `main` function accepts as command-line arguments a director
 * The output layer of the neural network have `NUM_CATEGORIES` units, one for each of the traffic sign categories.
 
 * The number of layers and the types of layers included in between are the result of experimenting with:
-  - different numbers of convolutional and pooling layers
-  - different numbers and sizes of filters for convolutional layers
-  - different pool sizes for pooling layers
-  - different numbers and sizes of hidden layers
-  - dropout
+  - Different numbers of convolutional and pooling layers.
+  - Different numbers and sizes of filters for convolutional layers.
+  - Different pool sizes for pooling layers.
+  - Different numbers and sizes of hidden layers.
+  - Dropout.
 
 ### What did I try, what worked well, what didn’t work well, and what did I notice
 
 **Convolutional and pooling layers**
 
-Multiple convolutional layers were able to get better results than a single convolutional layer. Also consecutives convolutional layers (Conv-Conv-Pool) were more effective than alterning with pooling layers (Conv-Pool-Conv).
+Multiple convolutional layers were able to get better results than a single convolutional layer. Also, consecutive convolutional layers (conv-conv-pool) were more effective than alternating with pooling layers (conv-pool-conv).
 
 My explanation to this is that as convolutional layers turned to crop the images, this actually worked pretty well for this image based dataset where the most relevant information for differentiation is at the center of the traffic signs, and not necessarily in the shape of the sign or at the messy background. So, going and cropping in total 6 pixels on each side by using three consecutive 5x5-kernel-convolution layers results in kicking out a 40% of not very relevant pixel information.
 
@@ -59,7 +59,7 @@ After this, only one 3x3-pooling layer was good enough to reduce the 32 feature 
 
 **Hidden layers**
 
-One single hidden layer containing a decent amount of units (120) worked far more better than multiple hidden layers (10) with significantly more units in the total (400).
+One single hidden layer containing a decent amount of units (120) worked far better than multiple hidden layers (10) with significantly more units in the total (400).
 
 Dropout slightly reduced the accuracy of the minimizing loss function at training, but it is worthy for avoiding overfitting on the training samples.
 
@@ -82,7 +82,7 @@ Dropout slightly reduced the accuracy of the minimizing loss function at trainin
 
 **To create, train, test and optionally save a model:** 
 
-* Inside of the `traffic` directory: `python traffic.py gtsrb [model.h5]`
+* Inside the `traffic` directory: `python traffic.py gtsrb [model.h5]`
 
 **To test a saved model on a selection of each of the 43 traffic signs:** 
 
