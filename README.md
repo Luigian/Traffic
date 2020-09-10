@@ -28,13 +28,22 @@ In `traffic.py` the `main` function accept as command-line arguments a directory
 
 * On macOS, the `/` character is used to separate path components, while the `\` character is used on Windows. By using `os.path.join`, this function is platform-independent, it works regardless of operating system.
 
-### Extracting the words
+### Defining the model
 
-* The `tokenize` function accepts a document (a string) as input, and return a list of all of the words in that document, in order and lowercased.
+* The `get_model` function return a compiled neural network model.
 
-* It uses nltk’s `word_tokenize` function to perform tokenization, and filters out punctuation and stopwords (common words that are unlikely to be useful for querying). Punctuation is defined as any character in `string.punctuation`. Stopwords are defined as any word in `nltk.corpus.stopwords.words("english")`.
+* We may assume that the input to the neural network will be of the shape (IMG_WIDTH, IMG_HEIGHT, 3) (that is, an array representing an image of width IMG_WIDTH, height IMG_HEIGHT, and 3 values for each pixel for red, green, and blue).
 
-* If a word appears multiple times in the document, it also appears multiple times in the returned list (unless it was filtered out).
+* The output layer of the neural network have NUM_CATEGORIES units, one for each of the traffic sign categories.
+
+* The number of layers and the types of layers included in between are the result of experimenting with:
+  - different numbers of convolutional and pooling layers
+  - different numbers and sizes of filters for convolutional layers
+  - different pool sizes for pooling layers
+  - different numbers and sizes of hidden layers
+  - dropout
+
+What did you try? What worked well? What didn’t work well? What did you notice?
 
 ### Calculating the inverse document frecuencies
 
